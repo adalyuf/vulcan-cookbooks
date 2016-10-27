@@ -3,8 +3,8 @@ node[:deploy].each do |application, deploy|
 
   template "#{deploy[:deploy_to]}/shared/config/system.yml" do
     source "system.yml.erb"
-    group deploy[:user]
-    owner deploy[:group]
+    group deploy[:group]
+    owner deploy[:user]
     mode "0660"
 
     only_if do
