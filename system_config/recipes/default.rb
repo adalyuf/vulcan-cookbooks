@@ -1,7 +1,7 @@
 node[:deploy].each do |application, deploy|
   deploy = node[:deploy][application]
 
-  template "#{deploy[:deploy_to]}/shared/config/system.yml" do
+  template "#{deploy[:deploy_to]}/current/config/system.yml" do
     source "system.yml.erb"
     group deploy[:group]
     owner deploy[:user]
