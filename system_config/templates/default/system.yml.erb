@@ -1,0 +1,11 @@
+services:
+  bea:
+    url: <%= @system_config[:services][:bea][:url] %>
+    api_key: <%= @system_config[:services][:bea][:api_key] %>
+  bls:
+    url: <%= @system_config[:services][:bea][:url] %>
+    storage: <%= @system_config[:services][:bea][:storage] %>
+settings:
+  paywall_date: '01/01/2000'
+mailer:
+  password: <%= @system_config[:mailer][:password] %>
