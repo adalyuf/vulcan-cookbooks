@@ -6,7 +6,7 @@ node[:deploy].each do |application, deploy|
     group deploy[:group]
     owner deploy[:user]
     mode "0660"
-    variables(:system_config => deploy[application][:system_config])
+    variables(:system_config => deploy[:system_config])
 
     only_if do
       deploy[:system_config].present? && File.directory?("#{deploy[:deploy_to]}/shared/config/")
