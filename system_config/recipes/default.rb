@@ -12,4 +12,15 @@ node[:deploy].each do |application, deploy|
       deploy[:system_config].present? && File.directory?("#{deploy[:deploy_to]}/shared/config/")
     end
   end
+
+  template "#{deploy[:deploy_to]}/current/config/secrets.yml" do
+    source "secrets.yml.erb"
+    group deploy[:group]
+    owner deploy[:user]
+    mode "0660"
+
+    only_if do
+      File.directory?("#{deploy[:deploy_to]}/shared/config/")
+    end
+  end
 end
