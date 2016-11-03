@@ -1,6 +1,12 @@
 node[:deploy].each do |application, deploy|
   deploy = node[:deploy][application]
 
+  execute "restart Rails app #{application}" do
+    cwd deploy[:current_path]
+    command node[:opsworks][:rails_stack][:restart_command]
+    action :nothing
+  end
+
   template "#{deploy[:deploy_to]}/current/config/system.yml" do
     source "system.yml.erb"
     group deploy[:group]
