@@ -8,6 +8,8 @@ node[:deploy].each do |application, deploy|
     mode "0660"
     variables(:system_config => deploy[:system_config])
 
+    notifies :run, "execute[restart Rails app #{application}]"
+
     only_if do
       deploy[:system_config].present? && File.directory?("#{deploy[:deploy_to]}/shared/config/")
     end
@@ -18,6 +20,8 @@ node[:deploy].each do |application, deploy|
     group deploy[:group]
     owner deploy[:user]
     mode "0660"
+
+    notifies :run, "execute[restart Rails app #{application}]"
 
     only_if do
       File.directory?("#{deploy[:deploy_to]}/shared/config/")
